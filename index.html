@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>WDI Project 1</title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="./js/app.js"></script>
-  </head>
-  <body >
+<head>
+  <meta charset="utf-8">
+  <title>WDI Project 1</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
+</head>
+
+<body >
+
+  <!-- =================== top section ===================== -->
+  <header>
+    <!-- //title -->
     <h1>The coding Turtle</h1>
-    <div class="main">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-    </div>
-  </body>
+
+    <!-- timer - 60 seconds -->
+    <aside id="timer"> 0 </aside>
+  </header>
+
+  <!-- ================== main section ==================== -->
+  <div class="main">
+    <!-- boxes where the different signs will appear -->
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  </div>
+  <!-- ==================== footer ============================ -->
+  <!-- button Ready? play -->
+  <button id="readyButton"> READY? </button>
+  <!-- score box -->
+  <div id="scoreBox"> Score : <span id="scoreCount"> 0 </span>
+    <!-- rules button -->
+    <button id="rulesBtn"> RULES </button>
+
+  </div>
+</body>
 </html>

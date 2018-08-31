@@ -1,6 +1,7 @@
 
 body {
-  background-color: darkGreen;
+  background-image: url(../assets/images/turtle-background.jpg);
+  background-size: cover;
 }
 
 .main {
@@ -16,6 +17,12 @@ body {
 
 }
 
+#timer {
+  height: 50px;
+  width: 50px;
+  border: 1px solid grey;
+  border-radius: 50%;
+}
 h1 {
   text-align: center;
   font-size: 50px;
@@ -26,4 +33,7 @@ h1 {
   height:150px;
   border: 1px dashed grey;
   justify-content: space-around;
+  font-size: 40px;
+  line-height: 150px;
+  text-align: center;
 }
