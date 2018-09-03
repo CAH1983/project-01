@@ -1,20 +1,63 @@
 $(() => {
   const characters = ['{','}','[', ']', '<', '>', '/', '*', '#', '@'];
   const $squares = $('div.box');
-  const $displayTime = $('aside.timer');
-  const charactersDisplayed = [];
+  const $displayTime = $('aside#timer');
+  let charactersDisplayed = [];
+  const $scoreCount = $('#scoreCount');
+
   let timerId = 0;
   let score = 0;
   let currentTime = 60;
 
+  const $startScreen = $('.start-screen');
+  const $endScreen = $('.end-screen');
+  const $gameOverScreen = $('.game-over-screen');
+  const $playBtn = $startScreen.find('button');
+  const $playAgainBtn = $endScreen.find('button');
+  const $numberOfPointsEarned = $endScreen.find('span');
 
-  // ~~~~~ Function to display a random character inside a  random square, store this character inside an array~~~
+
+  // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
+  $endScreen.hide();
+  $gameOverScreen.hide();
+
+  $playBtn.on('click', () => {
+    $startScreen.hide();
+    startGame();
+  });
+
+  function endGame() {
+    $endScreen.show();
+    clearInterval(timerId);
+    $numberOfPointsEarned.text(`${score}`);
+
+    if (score <5) {
+      $endScreen.text('You can do better! Try again?');
+    } else {
+      $endScreen.text('Great Score! Another game?')
+    };
+  }
+
+  $playAgainBtn.on('click', () => {
+    startGame();
+
+
+  function startGame() {
+    timerId = setInterval(() => {
+      currentTime--;
+      if(currentTime === 0) endGame();
+    }, 1000);
+
+
+
+  // ===== Display a random character inside a  random square, store this character inside an array ====
 
   function insertChar () {
+    const $emptySquares = $squares.filter(':empty');
     // generate a random square index
-    const randomSqIdx = Math.floor(Math.random() * $squares.length);
+    const randomSqIdx = Math.floor(Math.random() * $emptySquares.length);
     // select the index of a $squares
-    const $randomSq = $squares.eq(randomSqIdx);
+    const $randomSq = $emptySquares.eq(randomSqIdx);
 
     // generate a random character randomSqIndex
     const randomCharIdx = Math.floor(Math.random() * characters.length);
@@ -25,45 +68,45 @@ $(() => {
     $randomSq.text(randomChar);
     // store the character into an array
     charactersDisplayed.push(randomChar);
+    // if screen gets full, Game Over page launches
+    if (charactersDisplayed.length === $squares.length) {
+      console.log('Game Over');
+      $gameOverScreen.show();
+      clearInterval(timerId);
+    }
   }
+
   insertChar();
-  // ~~~~~~~~~~~~ a random character will appear every second in a square ~~~~~~~~~~~~
+  //  a random character will appear every second in a square
   setInterval(insertChar, 1000);
 
-  // ~~~~~~~~~~~~~~ create a function to score points ~~~~~~~~~~~~~
+  // ============= what happens when the user press a key ===================
   $(document).on('keyup', (e) => {
     if (charactersDisplayed.includes(e.key)) score++;
     console.log('SCORE ==========>', score);
-    score.text(score);
-    //remove the character typed from the array characterDisplayed
-    // ??? characterDisplayed.??(e.key.value); ???
+    $scoreCount.text(score);
 
-    const i = charactersDisplayed.indexOf(randomChar);
-    if (keyPressed = randomChar) {
-      charactersDisplayed.splice(i,)
-    }
+    $squares.filter(`:contains('${e.key}')`).empty();
 
+    charactersDisplayed = charactersDisplayed.filter(character => character !== e.key);
+  });
+
+  // ============= Run the 60 seconds timer =============
+  function decrease () {
+    currentTime--;
+    $displayTime.text(currentTime);
   }
-  );
 
-  // ~~~~~~~~~~~~~~ create a timer set up to 60s ~~~~~~~~~~~~~~~~~
   function timerCount() {
     timerId = setInterval(()=>{
-      currentTime--;
-      $displayTime.text(currentTime);
-      if(currentTime === 0) {
+      console.log('Current time ======>', currentTime);
+      decrease();
+      if (currentTime === 0) {
         clearInterval(timerId);
       }
     }, 1000);
-    console.log('Current time ======>', currentTime);
   }
 
   timerCount();
-  function speak (message) {
-    var msg = new SpeechSynthesisUtterance(message);
-    var voices = window.speechSynthesis.getVoices();
-    msg.voice = voices[0];
-    window.speechSynthesis.speak(msg);
-  }
-  speak('Help the turtle to code, type as fast as you can, each correct answer scores 1 point, each combo scores 5');
+
 });

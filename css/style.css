@@ -1,20 +1,28 @@
+* {
+  box-sizing: border-box;
+}
 
 body {
   background-image: url(../assets/images/turtle-background.jpg);
-  background-size: cover;
+  background-size: 100%;
 }
 
-.main {
-  width: 1100px;
-  height: 700px;
-  margin: 50px auto;
-  display: flex;
-  border: 1px dashed grey;
-  align-items: center;
-  justify-content: center, space-evenly;
-  /* justify-content: space-around; */
-  flex-wrap: wrap;
+h1 {
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+}
 
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+}
+
+.grid div {
+  width: 25%;
+  height: 100px;
+  border: 1px dotted black;
 }
 
 #timer {
@@ -25,17 +33,38 @@ body {
   text-align: center;
   line-height: 50px;
 }
-h1 {
-  text-align: center;
-  font-size: 50px;
-}
+
 
 .box {
   width: 150px;
-  height:150px;
+  height: 150px;
   border: 1px dashed grey;
   justify-content: space-around;
   font-size: 40px;
   line-height: 150px;
   text-align: center;
+}
+
+
+/* ................ pages to hide during the game .................. */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+}
+
+.end-screen {
+
+}
+
+.start-screen {
+
+}
+
+.game-over-screen {
+  
 }
