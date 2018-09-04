@@ -2,12 +2,24 @@
   box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Hyperspace Bold';
+    src: url('../assets/fonts/Hyperspace Bold.otf');
+}
+
+@font-face {
+    font-family: 'Hyperspace italic';
+    src: url('../assets/fonts/Hyperspace Italic.otf');
+}
+
+
 body {
   background-image: url(../assets/images/turtle-background.jpg);
   background-size: 100%;
 }
 
 h1 {
+  font-family: "Hyperspace Bold", "Arial";
   text-align: center;
   font-size: 50px;
   margin: 0;
@@ -32,6 +44,8 @@ h1 {
   border-radius: 50%;
   text-align: center;
   line-height: 50px;
+  font-family: "Hyperspace Italic", "Arial";
+  font-size: 35px;
 }
 
 
@@ -62,9 +76,33 @@ h1 {
 }
 
 .start-screen {
+  background-image: url(../assets/images/computer-screen.gif);
+  color: white;
+  font-size: 18;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  justify-content:space-between;
+  justify-content:space-evenly;
+  align-items: center;
 
 }
 
-.game-over-screen {
-  
+.start-screen button {
+  width: 300px;
+  height: 100px;
+  font: arial, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: black;
+  opacity: 0.5;
+  color: white;
+  border-radius: 10%;
+  padding: 30px;
+}
+
+.start-screen img {
+  width: 200px;
+  height: auto;
 }

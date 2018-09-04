@@ -5,54 +5,81 @@ $(() => {
   let charactersDisplayed = [];
   const $scoreCount = $('#scoreCount');
 
-  let timerId = 0;
+  let clockTimer = 0;
+  let charTimer = 0;
   let score = 0;
   let currentTime = 60;
 
   const $startScreen = $('.start-screen');
   const $endScreen = $('.end-screen');
-  const $gameOverScreen = $('.game-over-screen');
+  const $endScreenText = $endScreen.find('#end-screen-text');
   const $playBtn = $startScreen.find('button');
   const $playAgainBtn = $endScreen.find('button');
+
   const $numberOfPointsEarned = $endScreen.find('span');
 
 
-  // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
+  // // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
   $endScreen.hide();
-  $gameOverScreen.hide();
 
   $playBtn.on('click', () => {
     $startScreen.hide();
     startGame();
   });
 
+  // END GAME function
   function endGame() {
+    console.log('endGame called...');
     $endScreen.show();
-    clearInterval(timerId);
-    $numberOfPointsEarned.text(`${score}`);
+    clearInterval(clockTimer);
+    clearInterval(charTimer);
+    $numberOfPointsEarned.text(score);
+    console.log('Game Over');
+    $endScreen.find('h1').text('Game Over');
 
-    if (score <5) {
-      $endScreen.text('You can do better! Try again?');
+    if (score < 5) {
+      $endScreenText.text('OMG! Try again!');
     } else {
-      $endScreen.text('Great Score! Another game?')
-    };
+      $endScreenText.text('Great Score! Another game?');
+    }
   }
-
+  // PLAY AGAIN Button
   $playAgainBtn.on('click', () => {
+    $endScreen.hide();
     startGame();
+  });
+
+  // RESET function
+  function reset() {
+    console.log('reset game');
+    currentTime = 60;
+    score = 0;
+    $squares.text('');
+    $displayTime.text(currentTime);
+    $scoreCount.text(score);
+    charactersDisplayed = [];
+  }
 
 
   function startGame() {
-    timerId = setInterval(() => {
+    console.log('starting game...');
+    reset();
+    clockTimer = setInterval(() => {
       currentTime--;
+      $displayTime.text(currentTime);
       if(currentTime === 0) endGame();
     }, 1000);
+    insertChar();
+    //  a random character will appear every second in a square
+    charTimer = setInterval(insertChar, 1000);
+  }
 
 
 
   // ===== Display a random character inside a  random square, store this character inside an array ====
 
   function insertChar () {
+    console.log('inserting char...');
     const $emptySquares = $squares.filter(':empty');
     // generate a random square index
     const randomSqIdx = Math.floor(Math.random() * $emptySquares.length);
@@ -68,17 +95,11 @@ $(() => {
     $randomSq.text(randomChar);
     // store the character into an array
     charactersDisplayed.push(randomChar);
-    // if screen gets full, Game Over page launches
+    // if GAME OVER
     if (charactersDisplayed.length === $squares.length) {
-      console.log('Game Over');
-      $gameOverScreen.show();
-      clearInterval(timerId);
+      endGame();
     }
   }
-
-  insertChar();
-  //  a random character will appear every second in a square
-  setInterval(insertChar, 1000);
 
   // ============= what happens when the user press a key ===================
   $(document).on('keyup', (e) => {
@@ -90,23 +111,5 @@ $(() => {
 
     charactersDisplayed = charactersDisplayed.filter(character => character !== e.key);
   });
-
-  // ============= Run the 60 seconds timer =============
-  function decrease () {
-    currentTime--;
-    $displayTime.text(currentTime);
-  }
-
-  function timerCount() {
-    timerId = setInterval(()=>{
-      console.log('Current time ======>', currentTime);
-      decrease();
-      if (currentTime === 0) {
-        clearInterval(timerId);
-      }
-    }, 1000);
-  }
-
-  timerCount();
 
 });
