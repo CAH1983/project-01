@@ -15,6 +15,7 @@ $(() => {
   const $endScreenText = $endScreen.find('#end-screen-text');
   const $playBtn = $startScreen.find('button');
   const $playAgainBtn = $endScreen.find('button');
+  const $endScreenIcon =  $('#end-screen-icon');
 
   const $numberOfPointsEarned = $endScreen.find('span');
 
@@ -23,16 +24,22 @@ $(() => {
   let gameIsPlaying = false;
 
 
-  // // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
-  $endScreen.hide();
+  // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
+  $endScreen.hide(); // hides the final screen
 
-  $playBtn.on('click', () => {
+  $playBtn.on('click', () => { //what happens when user clicks START
     $startScreen.hide();
-    startGame();
+    clockTimer = setInterval(() => {
+      currentTime--;
+      $displayTime.text(currentTime);
+      if(currentTime === 0) endGame();
+    }, 1000);
+    charTimer = setInterval(insertChar, 1000);
+    // startGame();
   });
 
-  // END GAME function
-  function endGame() {
+
+  function endGame() {  // END GAME function
     console.log('endGame called...');
     $endScreen.show();
     clearInterval(clockTimer);
@@ -43,28 +50,41 @@ $(() => {
 
     if (score < 5) {
       $endScreenText.text('OMG! Try again!');
+      $endScreenIcon.hide;
     } else {
       $endScreenText.text('Great Score! Another game?');
     }
   }
-  // PLAY AGAIN Button
-  $playAgainBtn.on('click', () => {
+
+  // $playAgainBtn.on('click', () => {
+  //   $endScreen.hide();
+  //   clockTimer = setInterval(() => {
+  //     currentTime--;
+  //     $displayTime.text(currentTime);
+  //     if(currentTime === 0) endGame();
+  //   }, 1000);
+  //   charTimer = setInterval(insertChar, 1000);
+  // });
+
+  $playAgainBtn.on('click', () => {  // PLAY AGAIN Button
+    gameIsPlaying = false;
     $endScreen.hide();
     startGame();
+
   });
 
   // RESET function
   function reset() {
     console.log('reset game');
-    currentTime = 60;
-    score = 0;
-    $squares.text('');
-    $displayTime.text(currentTime);
-    $scoreCount.text(score);
-    charactersDisplayed = [];
+    currentTime = 60; // reset time
+    score = 0;       // reset score
+    $squares.text('');  // reset square boxes
+    $displayTime.text(currentTime);  // count time
+    $scoreCount.text(score); // count score
+    charactersDisplayed = []; // store characters into the empty array
   }
 
-
+  // Start the game function
   function startGame() {
     console.log('starting game...');
     reset();
@@ -73,7 +93,7 @@ $(() => {
   }
 
 
-  // ===== Display a random character inside a  random square, store this character inside an array ====
+  // ===== Insert a random character in a random square ===
 
   function insertChar () {
     console.log('inserting char...');
@@ -101,7 +121,7 @@ $(() => {
   // ===================== Play / Pause button ==========================
 
   function toggleTimers () {
-    if(!gameIsPlaying) {
+    if(!gameIsPlaying) { // if game is not playing, LAUNCH
       clockTimer = setInterval(() => {
         currentTime--;
         $displayTime.text(currentTime);
@@ -109,9 +129,9 @@ $(() => {
       }, 1000);
       charTimer = setInterval(insertChar, 1000);
 
-    } else {
-      clearInterval(clockTimer);
-      clearInterval(charTimer);
+    } else {     // if game is playing, PAUSE
+      clearInterval(clockTimer); // stops the counter seconds
+      clearInterval(charTimer); // stops producing characters
     }
     gameIsPlaying = !gameIsPlaying;
   }
