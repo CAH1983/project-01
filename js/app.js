@@ -18,6 +18,10 @@ $(() => {
 
   const $numberOfPointsEarned = $endScreen.find('span');
 
+  const $playPauseBtn = $('.play-pause');
+
+  let gameIsPlaying = false;
+
 
   // // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
   $endScreen.hide();
@@ -64,16 +68,9 @@ $(() => {
   function startGame() {
     console.log('starting game...');
     reset();
-    clockTimer = setInterval(() => {
-      currentTime--;
-      $displayTime.text(currentTime);
-      if(currentTime === 0) endGame();
-    }, 1000);
+    toggleTimers();
     insertChar();
-    //  a random character will appear every second in a square
-    charTimer = setInterval(insertChar, 1000);
   }
-
 
 
   // ===== Display a random character inside a  random square, store this character inside an array ====
@@ -101,6 +98,27 @@ $(() => {
     }
   }
 
+  // ===================== Play / Pause button ==========================
+
+  function toggleTimers () {
+    if(!gameIsPlaying) {
+      clockTimer = setInterval(() => {
+        currentTime--;
+        $displayTime.text(currentTime);
+        if(currentTime === 0) endGame();
+      }, 1000);
+      charTimer = setInterval(insertChar, 1000);
+
+    } else {
+      clearInterval(clockTimer);
+      clearInterval(charTimer);
+    }
+    gameIsPlaying = !gameIsPlaying;
+  }
+
+  $playPauseBtn.on('click', toggleTimers);
+
+
   // ============= what happens when the user press a key ===================
   $(document).on('keyup', (e) => {
     if (charactersDisplayed.includes(e.key)) score++;
@@ -111,5 +129,6 @@ $(() => {
 
     charactersDisplayed = charactersDisplayed.filter(character => character !== e.key);
   });
+
 
 });

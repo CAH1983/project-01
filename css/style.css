@@ -12,54 +12,107 @@
     src: url('../assets/fonts/Hyperspace Italic.otf');
 }
 
-
 body {
-  background-image: url(../assets/images/turtle-background.jpg);
-  background-size: 100%;
+  margin: 0;
+  background-image: url(../assets/images/grey-background.jpg);
+  background-size: 1800px;
+  color: lightGreen;
+  font-family: "Hyperspace", "Arial";
 }
 
+/* HEADER */
 h1 {
   font-family: "Hyperspace Bold", "Arial";
   text-align: center;
   font-size: 50px;
-  margin: 0;
 }
 
+
+#timer {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  height: 100px;
+  width: 100px;
+  border: 3px solid lightGreen;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100px;
+  font-family: "Hyperspace Italic", "Arial";
+  text-shadow: 2px 2px 5px red;
+  font-size: 35px;
+}
+
+/* TEMPLATE */
+.container {
+  color: lightGreen;
+  text-shadow: 2px 2px 5px black;
+  padding: 10px;
+  width: 1200px;
+  height: 800px;
+  margin: auto;
+  position: relative;
+  padding: 50px;
+}
+
+/* BOXES */
 .grid {
   display: flex;
   flex-wrap: wrap;
-  width: 600px;
+  width: 800px;
+  justify-content: center;
+  justify-content:space-between;
+  justify-content:space-evenly;
+  margin: auto;
+
 }
 
 .grid div {
   width: 25%;
   height: 100px;
-  border: 1px dotted black;
-}
-
-#timer {
-  height: 50px;
-  width: 50px;
-  border: 1px solid grey;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 50px;
-  font-family: "Hyperspace Italic", "Arial";
-  font-size: 35px;
+  border: 1px dotted white;
 }
 
 
 .box {
   width: 150px;
   height: 150px;
-  border: 1px dashed grey;
+  border: 1px dashed white;
   justify-content: space-around;
   font-size: 40px;
   line-height: 150px;
   text-align: center;
+  color: lightBlue;
 }
 
+/* FOOTER */
+footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content:space-between;
 
+}
+
+#scoreBox {
+  font-family: "Hyperspace Bold", "Arial";
+  text-align: center;
+  margin: 0 auto;
+}
+
+#scoreCount {
+  font-family: "Hyperspace Italic", "Arial";
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#turtle-icon {
+  background-image: url(../assets/images/small-turtle.png);
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 /* ................ pages to hide during the game .................. */
 
 .overlay {
@@ -68,41 +121,100 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: rgb(42, 42, 42);
+  z-index: 10;
 }
 
+/* .................... END SCREEN ...................................... */
 .end-screen {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+#end-screen-icon {
+  background-image: url(../assets/images/cup.svg);
+  height: 120px;
+  width: 120px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-top: 50px;
 
 }
 
+.end-screen button {
+  width: 150px;
+  height: 50px;
+  margin:
+  font: arial, sans-serif;
+  font-size: 15px;
+  background-color: transparent;
+  color: pink;
+  border-color: rgb(132, 187, 180);
+  border-radius: 10%;
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+.filter {
+
+  background-color: rgb(42, 42, 42);
+  opacity: 0.9;
+  width: 1000px;
+  height: 600px;
+  margin: 100px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
 .start-screen {
-  background-image: url(../assets/images/computer-screen.gif);
-  color: white;
+  background-image: url(../assets/images/matrix-background.gif);
+  color: lightGreen;
+  text-shadow: 2px 2px 5px black;
   font-size: 18;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  justify-content:space-between;
-  justify-content:space-evenly;
   align-items: center;
 
 }
 
+.start-game-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+
 .start-screen button {
+  background-image: url(../assets/images/matrix-background.gif);
   width: 300px;
   height: 100px;
   font: arial, sans-serif;
   font-size: 25px;
-  font-weight: bold;
   background-color: black;
-  opacity: 0.5;
-  color: white;
+  opacity: 0.8;
+  color: lightGreen;
+  border-color: rgb(132, 187, 180);
   border-radius: 10%;
   padding: 30px;
 }
 
 .start-screen img {
-  width: 200px;
+  position: absolute;
+  left: 70px;
+  bottom: 70px;
+  width: 300px;
   height: auto;
 }

@@ -13,35 +13,39 @@
   <!-- ======================= GAME  ======================= -->
 
   <div class="overlay start-screen">
-    <h1> Welcome to the Coding Turtle! </h1>
-    <img src="assets/images/walking-turtle.gif" alt="walking turtle">
-    <button> START GAME </button>
+    <div class="filter">
+
+      <h1> Welcome to the Coding Turtle! </h1>
+      <img src="assets/images/turtle-hello.png" alt="Cheering turtle">
+      <div class="start-game-box">
+        <button> START GAME </button>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="overlay end-screen">
-    <h1> Time Up! </h1>
-    <p> <span> -- </span> points</p>
-    <p id="end-screen-text"></p>
-    <img src="assets/images/struggling-turtle.gif" alt="struggling turtle">
+    <div class="container">
+      <h1> Time Up! </h1>
+      <p> <span>  </span> points</p>
+      <p id="end-screen-text"></p>
+      <div id="end-screen-icon"> </div>
+      <button> PLAY AGAIN </button>
+    </div>
 
-    <button> PLAY AGAIN </button>
   </div>
 
-  <!--................. main section ................ -->
-  <main>
-    <header>
-      <h1>The coding Turtle</h1>
-      <aside id="timer"> 60 </aside>
-    </header>
+
+<!-- ====================== MAIN =====================-->
+
+<main class="container">
+
+    <h1>The coding Turtle</h1>
+    <aside id="timer"> 60 </aside>
+
 
     <div class="grid">
-      <!-- boxes where the different signs will appear -->
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
 
       <div class="box"></div>
       <div class="box"></div>
@@ -56,13 +60,23 @@
       <div class="box"></div>
       <div class="box"></div>
       <div class="box"></div>
+
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+
     </div>
 
-    <div id="scoreBox">
-      Score : <span id="scoreCount"> 0 </span>
-    </div>
-
-    <button id="pauseBtn"> Pause/Play </button>
+    <footer>
+      <button class="play-pause"> PLAY/PAUSE </button>
+      <div id="scoreBox">
+        { Score : <span id="scoreCount"> 0  </span> }
+      </div>
+      <div id="turtle-icon"></div>
+    </footer>
 
   </main>
 
