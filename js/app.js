@@ -18,6 +18,7 @@ $(() => {
   const $endScreenIcon =  $('#end-screen-icon');
 
 
+
   const $numberOfPointsEarned = $endScreen.find('span');
 
   const $playPauseBtn = $('.play-pause');
@@ -56,18 +57,21 @@ $(() => {
     clearInterval(charTimer);
     $numberOfPointsEarned.text(score);
     console.log('Game Over');
-    $endScreen.find('h1').text('Game Over');
 
     if (score < 5) {
       $gameOverSound[0].play();
       $endScreenText.text('OMG! Try again!');
-      $endScreenIcon.hide;
+      $endScreenIcon.hide();
+      $endScreen.find('h1').text('Game Over');
+
     } else {
+      $endScreen.find('h1').text('Game Over');
       $endScreenText.text('Great Score! Another game?');
     }
   }
 
   $playAgainBtn.on('click', () => {  // PLAY AGAIN Button
+    $chineseGong[0].play();
     gameIsPlaying = false;
     $endScreen.hide();
     startGame();
@@ -156,6 +160,5 @@ $(() => {
       $wrongKeySound[0].play();
     }
   });
-
 
 });
