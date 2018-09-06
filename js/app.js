@@ -17,17 +17,26 @@ $(() => {
   const $playAgainBtn = $endScreen.find('button');
   const $endScreenIcon =  $('#end-screen-icon');
 
+
   const $numberOfPointsEarned = $endScreen.find('span');
 
   const $playPauseBtn = $('.play-pause');
 
   let gameIsPlaying = false;
 
+  // sounds
+  const $popSound = $('#pop-sound');
+  const $chineseGong = $('#chinese-gong');
+  const $gameOverSound = $('#game-over-sound');
+  const $wrongKeySound = $('#wrong-key');
+  const $endGameSound = $('#president-intro');
+
+
 
   // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
   $endScreen.hide(); // hides the final screen
-
   $playBtn.on('click', () => { //what happens when user clicks START
+    $chineseGong[0].play();
     $startScreen.hide();
     clockTimer = setInterval(() => {
       currentTime--;
@@ -41,6 +50,7 @@ $(() => {
 
   function endGame() {  // END GAME function
     console.log('endGame called...');
+    $chineseGong[0].play();
     $endScreen.show();
     clearInterval(clockTimer);
     clearInterval(charTimer);
@@ -49,22 +59,13 @@ $(() => {
     $endScreen.find('h1').text('Game Over');
 
     if (score < 5) {
+      $gameOverSound[0].play();
       $endScreenText.text('OMG! Try again!');
       $endScreenIcon.hide;
     } else {
       $endScreenText.text('Great Score! Another game?');
     }
   }
-
-  // $playAgainBtn.on('click', () => {
-  //   $endScreen.hide();
-  //   clockTimer = setInterval(() => {
-  //     currentTime--;
-  //     $displayTime.text(currentTime);
-  //     if(currentTime === 0) endGame();
-  //   }, 1000);
-  //   charTimer = setInterval(insertChar, 1000);
-  // });
 
   $playAgainBtn.on('click', () => {  // PLAY AGAIN Button
     gameIsPlaying = false;
@@ -141,13 +142,19 @@ $(() => {
 
   // ============= what happens when the user press a key ===================
   $(document).on('keyup', (e) => {
-    if (charactersDisplayed.includes(e.key)) score++;
-    console.log('SCORE ==========>', score);
-    $scoreCount.text(score);
+    if(['Shift', 'Tab', 'Meta', 'Alt'].includes(e.key)) return false;
 
-    $squares.filter(`:contains('${e.key}')`).empty();
+    if (charactersDisplayed.includes(e.key)) {
+      score++;
+      console.log('SCORE ==========>', score);
+      $popSound[0].play();
+      $scoreCount.text(score);
+      $squares.filter(`:contains('${e.key}')`).empty();
+      charactersDisplayed = charactersDisplayed.filter(character => character !== e.key);
 
-    charactersDisplayed = charactersDisplayed.filter(character => character !== e.key);
+    } else {
+      $wrongKeySound[0].play();
+    }
   });
 
 
