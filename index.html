@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <title>WDI Project 1</title>
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="./js/app.js"></script>
 
@@ -39,9 +42,9 @@
 
   <div class="overlay end-screen">
     <div class="container">
-      <h1>  </h1>
+      <h1> TIME UP </h1>
       <p> <span>  </span> points</p>
-      <p id="end-screen-text"></p>
+      <p id="end-screen-text"> text </p>
       <div id="end-screen-icon"> </div>
       <button> PLAY AGAIN </button>
     </div>
@@ -84,7 +87,10 @@
     </div>
 
     <footer>
-      <button class="play-pause"> PLAY/PAUSE </button>
+      <button class="play-pause">
+        <i class="fas fa-play"></i> <i class="fas fa-pause"></i>
+      </button>
+
       <div id="scoreBox">
         { Score : <span id="scoreCount"> 0  </span> }
       </div>

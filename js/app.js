@@ -30,10 +30,10 @@ $(() => {
   const $chineseGong = $('#chinese-gong');
   const $gameOverSound = $('#game-over-sound');
   const $wrongKeySound = $('#wrong-key');
-  const $endGameSound = $('#president-intro');
+  // const $endGameSound = $('#president-intro');
 
 
-
+  // $('main').hide();
   // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
   $endScreen.hide(); // hides the final screen
   $playBtn.on('click', () => { //what happens when user clicks START
@@ -62,10 +62,10 @@ $(() => {
       $gameOverSound[0].play();
       $endScreenText.text('OMG! Try again!');
       $endScreenIcon.hide();
-      $endScreen.find('h1').text('Game Over');
+      $endScreen.find('h1').text('GAME OVER');
 
     } else {
-      $endScreen.find('h1').text('Game Over');
+      $endScreen.find('h1').text('TIME UP!');
       $endScreenText.text('Great Score! Another game?');
     }
   }
