@@ -1,5 +1,5 @@
 $(() => {
-  const characters = ['{','}','[', ']', '<', '>', '/', '*', '#', '@'];
+  const characters = ['{','}','[', ']', '<', '>', '/', '*', '#', '@', ';', '='];
   const $squares = $('div.box');
   const $displayTime = $('aside#timer');
   let charactersDisplayed = [];
@@ -13,14 +13,11 @@ $(() => {
   const $startScreen = $('.start-screen');
   const $endScreen = $('.end-screen');
   const $endScreenText = $endScreen.find('#end-screen-text');
-  const $playBtn = $startScreen.find('button');
-  const $playAgainBtn = $endScreen.find('button');
   const $endScreenIcon =  $('#end-screen-icon');
-
-
-
   const $numberOfPointsEarned = $endScreen.find('span');
 
+  const $playBtn = $startScreen.find('button');
+  const $playAgainBtn = $endScreen.find('button');
   const $playPauseBtn = $('.play-pause');
 
   let gameIsPlaying = false;
@@ -37,15 +34,7 @@ $(() => {
   // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
   $endScreen.hide(); // hides the final screen
   $playBtn.on('click', () => { //what happens when user clicks START
-    $chineseGong[0].play();
-    $startScreen.hide();
-    clockTimer = setInterval(() => {
-      currentTime--;
-      $displayTime.text(currentTime);
-      if(currentTime === 0) endGame();
-    }, 1000);
-    charTimer = setInterval(insertChar, 1000);
-    // startGame();
+    startGame();
   });
 
 
@@ -59,7 +48,9 @@ $(() => {
     console.log('Game Over');
 
     if (score < 5) {
-      $gameOverSound[0].play();
+      setTimeout(() => {
+        $gameOverSound[0].play();
+      },5000);
       $endScreenText.text('OMG! Try again!');
       $endScreenIcon.hide();
       $endScreen.find('h1').text('GAME OVER');
@@ -89,12 +80,17 @@ $(() => {
     charactersDisplayed = []; // store characters into the empty array
   }
 
-  // Start the game function
+  // ========  START THE GAME function =====================
   function startGame() {
-    console.log('starting game...');
     reset();
-    toggleTimers();
-    insertChar();
+    $chineseGong[0].play();
+
+    $startScreen.fadeOut(1000,
+      setTimeout(() => {
+        console.log('starting game...');
+        toggleTimers();
+        insertChar();
+      }, 1000));
   }
 
 
@@ -118,7 +114,7 @@ $(() => {
     // store the character into an array
     charactersDisplayed.push(randomChar);
     // if GAME OVER
-    if (charactersDisplayed.length === $squares.length) {
+    if (charactersDisplayed.length === $squares.length) { // full screen
       endGame();
     }
   }
@@ -132,7 +128,7 @@ $(() => {
         $displayTime.text(currentTime);
         if(currentTime === 0) endGame();
       }, 1000);
-      charTimer = setInterval(insertChar, 1000);
+      charTimer = setInterval(insertChar, 2000);
 
     } else {     // if game is playing, PAUSE
       clearInterval(clockTimer); // stops the counter seconds
@@ -146,12 +142,12 @@ $(() => {
 
   // ============= what happens when the user press a key ===================
   $(document).on('keyup', (e) => {
-    if(['Shift', 'Tab', 'Meta', 'Alt'].includes(e.key)) return false;
+    if(['Shift', 'Tab', 'Meta', 'Alt'].includes(e.key)) return false; // cancel those keys
 
     if (charactersDisplayed.includes(e.key)) {
+      $popSound[0].play();
       score++;
       console.log('SCORE ==========>', score);
-      $popSound[0].play();
       $scoreCount.text(score);
       $squares.filter(`:contains('${e.key}')`).empty();
       charactersDisplayed = charactersDisplayed.filter(character => character !== e.key);
