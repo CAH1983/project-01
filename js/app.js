@@ -27,10 +27,9 @@ $(() => {
   const $chineseGong = $('#chinese-gong');
   const $gameOverSound = $('#game-over-sound');
   const $wrongKeySound = $('#wrong-key');
-  // const $endGameSound = $('#president-intro');
 
 
-  // $('main').hide();
+
   // ======================== LAUNCH GAME, START SCREEN, END SCREEN ==========================
   $endScreen.hide(); // hides the final screen
   $playBtn.on('click', () => { //what happens when user clicks START
