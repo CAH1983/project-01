@@ -84,12 +84,12 @@ $(() => {
     reset();
     $chineseGong[0].play();
 
-    $startScreen.fadeOut(1000,
-      setTimeout(() => {
-        console.log('starting game...');
-        toggleTimers();
-        insertChar();
-      }, 1000));
+    $startScreen.fadeOut(1000);
+    setTimeout(() => {
+      console.log('starting game...');
+      toggleTimers();
+      insertChar();
+    }, 1000);
   }
 
 
